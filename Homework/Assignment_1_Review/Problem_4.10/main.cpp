@@ -18,13 +18,13 @@ using namespace std;
 
 //Program starts here
 int main(int argc, char** argv) {
-
+    //verify varaiables
     float total,units;
-    
+    //ask for amount wanted
     cout<<"How many units are being puchased?\n";
     cin>>units;
-    
     cout<<setprecision(2)<<fixed;
+    //calculate and produce reults according to amount wanted
     if (units<10)
         cout<<"Your total is $"<<99.00*units<<endl;
     else if (units>=10&&units<=19)
