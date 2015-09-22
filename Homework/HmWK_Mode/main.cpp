@@ -4,21 +4,24 @@
  * Purpose: Find the Mode in an Array
  * Created on September 21, 2015, 6:41 PM
  */
-
+//System Programs
 #include <iostream>
 
 using namespace std;
+//User Programs
+
+//Global constants
 
 //Function Prototypes
 void SamAry (int);//Function to set up the array
 void SrtAry (int [],int);//Function to call in the array
 void ShwAry (const int[], int);//Function to show sorted numbers
-void calculateMode(int [], int);
+void calculateMode(int [], int);//Function to find mode
 
 int main(int argc, char** argv) {
     //Set up the Array
     const int SIZE = 6;
-    int numbers[SIZE]={2,4,3,1,5,6};
+    int numbers[SIZE]={2,4,3,1,5,3};
     cout<<"The unsorted numbers in the array are:\n";
     //Cycles through the numbers one by one and prints them out
     for (int index=0; index<SIZE; index++)
@@ -55,7 +58,7 @@ void SrtAry (int array[],int size)
                 array[count]=array[count+1];
                 array[count+1]=temp;
                 swap=true;
-            }
+            } 
         }
     }while(swap);
 }      
@@ -66,6 +69,10 @@ void ShwAry (const int array[], int size)
         cout<<array[count]<<" ";
     cout<<endl;
 }
+
+//I wont even begin to pretend like i came up with this myself
+//Shamefully stolen from http://www.cplusplus.com/forum/beginner/116489/
+//all credit for this function goes to them
 void calculateMode(int array[],int size){
     int counter=1,max=0,mode=array[0];
     for (int pass=0;pass<size-1;pass++)
