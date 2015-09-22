@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
     cout<<"\n";
     //Sort the Array
     SrtAry(numbers,SIZE);
+    //Show the Array, now sorted
     cout<<"The sorted Values are:\n";
     ShwAry(numbers, SIZE);
 
@@ -35,7 +36,7 @@ void SamAry (int num)
 {
     cout<<num<<" ";
 }
-
+//Function that sort array, sample in Gaddis 9th edition, page 467
 void SrtAry (int array[],int size)
 {
     bool swap;
@@ -56,7 +57,7 @@ void SrtAry (int array[],int size)
         }
     }while(swap);
 }      
-
+//to show that values of the sorted array, also from gaddis
 void ShwAry (const int array[], int size)
 {
     for (int count=0;count<size;count++)
