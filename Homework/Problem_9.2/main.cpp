@@ -12,7 +12,8 @@
 //Global Constants
 
 //Function prototypes
-float avrge (int);  
+float avrge (int[],int);
+int sort(int[],int);
 
 using namespace std;
 
@@ -28,31 +29,67 @@ int main(int argc, char** argv) {\
     test=new int [scores];
     //Set up the loop to record the scores
     cout<<"Enter "<<scores<<" test scores\n";
+    cout<<"Be sure they are all positive numbers"<<endl;
+    if (scores<0)
+        cout<<"Cannot acccept negative numbers"<<endl;
+    else{
     for (scroll=0;scroll<scores;scroll++){
         cin>>test[scroll];
     }
-    //calculation for average scores
-    for (scroll=0;scroll<scores;scroll++){
-        total+=test[scroll];
-    }
-    float avrge=total/scores*1.0;
-    //avrge(test);
+    }    
+    
     //Output the information to confirm
     cout<<"The numbers you entered were"<<endl;
     for (scroll=0;scroll<scores;scroll++){
         cout<<test[scroll]<<" ";
     }
-    cout<<"\nThe Average is "<<avrge<<endl;
+    cout<<endl;
+    //bubble sort function
+    sort(test,scores);
     
-        
-           
+    //Average scores function
+    avrge(test, scores);
 
     return 0;
 }
 
-//float avrge(int test){
- //   float total;
-  //  for (int count=0;count<test;count++)
-   //     total+=test[count];
-//}
+float avrge(int test[],int scores){
+    //calculation for average scores
+    int total;
+    for (int scroll=0;scroll<scores;scroll++){
+        total+=test[scroll];
+    }
+    float avrge=(float)total/(float)scores;
+    cout<<"The Average is "<<avrge<<endl;
+    return 0;
+}
+
+//bubble sort
+int sort(int test[],int scores){
+    bool swap;
+    int temp;
+    
+    do
+    {
+        swap=false;
+        for (int count=0;count<(scores-1);count++)
+        {
+            if (test[count]>test[count+1])
+            {
+                temp=test[count];
+                test[count]=test[count+1];
+                test[count+1]=temp;
+                swap=true;
+            }
+        }
+    } while(swap);
+    cout<<"The scores sorted are: "<<endl;
+    for (int count=0; count<scores;count++)
+        cout<<test[count]<<" ";
+    cout<<endl;
+}
+
+       
+    
+
 
