@@ -33,15 +33,13 @@ int main(int argc, char** argv) {
     
     //Repeat what was entered to the user
     cout<<"This is what you entered:\n";
-//    while(line[count]!='\0'){
-//        cout<<line[count];
-//        count++;           
-//    }
     cout<<line<<endl;
     
-    //Send it to the two different functions
+    //Send it to the function and return the value to be used for the average
     int temp=wrdcount(line,SIZE);
+    //length function
     length=strlen(line);
+    //average amount of letters per word, using a float to get most accurate
     word=float((length-temp)/float(temp));
     
     
@@ -59,9 +57,7 @@ int wrdcount(char *line,char SIZE){
             count++;
         line++;
         }
-    //cout<<"\nThere are "<<count<<" words in the sentence"<<endl; 
     return count;
-
 }
 
 
