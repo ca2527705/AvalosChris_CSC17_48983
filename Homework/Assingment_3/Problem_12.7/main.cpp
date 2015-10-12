@@ -53,7 +53,6 @@ int main(int argc, char** argv) {
         //read the sentence from file1
         cin.ignore();
         getline(idata,str);
-        cout<<str;
         if (str.length()>0){
             str[0]=toupper(str[0]);
             for(int i=0;i<str.length()-1;i++){
