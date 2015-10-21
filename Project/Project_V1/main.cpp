@@ -9,6 +9,7 @@
 #include <cstdlib>//To use the rand
 #include <ctime>//For use in the rand
 #include <fstream>//For use in the file in/out
+#include <string>//For use in the name
 using namespace std;
 
 //user libraries
@@ -20,14 +21,24 @@ short intro(short& pow,short& def,short& attk);
 short battle(short,short,short,short);
 short dice(int);
 
+struct player
+{
+    string name;    //player name
+    int pow;    //players power
+    int def;    //players defensive stat
+    int attk;   //players attack value
+};
+
 //The fun starts here!
 int main(int argc, char** argv) {
     //define the variables
+    player info;
+    
     short pow,def,attk,PlayHp;
     
     intro(pow,def,attk);
     
-    battle(pow,def,attk,PlayHp=50);
+    battle(pow,def,attk,PlayHp);
             
     return 0;
 }
@@ -40,7 +51,11 @@ short intro(short& pow,short& def,short& attk){
     //for file in/out
     ofstream fileout;
     ifstream filein;
+    player info;
     //Creating the character stats
+    cout<<"Hello! Please enter the player name\n";
+    getline(cin, info.name);
+    cout<<"Welcome "<<info.name<<"!\n";
     //Gives them an option to either roll randomly for their stats or to input
     //their own
     cout<<"Would you like to roll randomly for your stats or assign your own?\n";
@@ -54,12 +69,15 @@ short intro(short& pow,short& def,short& attk){
         cout<<"The following rolls will see what kind of stats you have"<<endl;
         //uses 3 sided die plus minimum result-1
         pow=(rand()%3)+11;
+        info.pow=pow;
         def=(rand()%3)+14;
+        info.def=def;
         attk=(rand()%3)+6;
+        info.attk=attk;
         //show them the random results
-        cout<<"Your Attack modifier is "<<attk<<endl;       
-        cout<<"Your Defense is "<<def<<endl;
-        cout<<"Your Pow is "<<pow<<endl;
+        cout<<"Your Attack modifier is "<<info.attk<<endl;       
+        cout<<"Your Defense is "<<info.def<<endl;
+        cout<<"Your Pow is "<<info.pow<<endl;
         //Give them the option to reroll if they want
         cout<<"Are you okay with these stats?"<<endl;
         cout<<"Enter Y to accept and N to enter new stats"<<endl;
@@ -117,6 +135,7 @@ short intro(short& pow,short& def,short& attk){
 short battle(short pow, short def, short attk, short PlayHp=50){
     //Set up the array to keep track of score
     int wins[1],loses[1];
+    player info;
     //After their stats are either input or rolled, have them select their
     //opponents from the list
     cout<<"Please select your opponent\n";
@@ -148,7 +167,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                 srand(static_cast<int>(time(0)));
                 int roll1; 
                 //Initiate the roll to Hit  
-                cout<<"Its your turn, Roll to hit!"<<endl;
+                cout<<"Its your turn,"<<info.name<<" Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
