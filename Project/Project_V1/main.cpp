@@ -15,12 +15,6 @@ using namespace std;
 //user libraries
 
 //global constants
-
-//function prototypes
-short intro(short& pow,short& def,short& attk);
-short battle(short,short,short,short);
-short dice(int);
-
 struct player
 {
     string name;    //player name
@@ -28,22 +22,28 @@ struct player
     int def;    //players defensive stat
     int attk;   //players attack value
 };
+//function prototypes
+void intro(player *info);
+void battle(player *info);
+short dice(int);
+
+
 
 //The fun starts here!
 int main(int argc, char** argv) {
     //define the variables
-    player info;
+    player *info = new player;//
     
     short pow,def,attk,PlayHp;
     
-    intro(pow,def,attk);
+    intro(info);
     
-    battle(pow,def,attk,PlayHp);
+    battle(info);
             
     return 0;
 }
 
-short intro(short& pow,short& def,short& attk){
+void intro(player *info){
     //Mostly variables involving dice rolls and the random generator
     //rolls using D6
     //Used to determine the stats
@@ -51,11 +51,10 @@ short intro(short& pow,short& def,short& attk){
     //for file in/out
     ofstream fileout;
     ifstream filein;
-    player info;
     //Creating the character stats
     cout<<"Hello! Please enter the player name\n";
-    getline(cin, info.name);
-    cout<<"Welcome "<<info.name<<"!\n";
+    getline(cin, info->name);
+    cout<<"Welcome "<<info->name<<"!\n";
     //Gives them an option to either roll randomly for their stats or to input
     //their own
     cout<<"Would you like to roll randomly for your stats or assign your own?\n";
@@ -68,16 +67,16 @@ short intro(short& pow,short& def,short& attk){
         do{
         cout<<"The following rolls will see what kind of stats you have"<<endl;
         //uses 3 sided die plus minimum result-1
-        pow=(rand()%3)+11;
-        info.pow=pow;
-        def=(rand()%3)+14;
-        info.def=def;
-        attk=(rand()%3)+6;
-        info.attk=attk;
+        
+        info->pow =(rand()%3)+11; //=pow;
+        
+        info->def=(rand()%3)+14;
+        
+        info->attk=(rand()%3)+6;
         //show them the random results
-        cout<<"Your Attack modifier is "<<info.attk<<endl;       
-        cout<<"Your Defense is "<<info.def<<endl;
-        cout<<"Your Pow is "<<info.pow<<endl;
+        cout<<"Your Attack modifier is "<<info->attk<<endl;       
+        cout<<"Your Defense is "<<info->def<<endl;
+        cout<<"Your Pow is "<<info->pow<<endl;
         //Give them the option to reroll if they want
         cout<<"Are you okay with these stats?"<<endl;
         cout<<"Enter Y to accept and N to enter new stats"<<endl;
@@ -92,28 +91,28 @@ short intro(short& pow,short& def,short& attk){
         //If they put in an improper value, then ask them to but it in again
         do{
         cout<<"For your pow, enter a number between 10 and 16\n";
-        cin>>pow;
-        while (pow<10||pow>15){
+        cin>>info->pow;
+        while (info->pow<10||info->pow>15){
             cout<<"Input a number between or equal to 10 and 16\n";
-            cin>>pow; 
+            cin>>info->pow; 
         }
         cout<<"For your def, enter a number between or equal to 14 and 16\n";
-        cin>>def;
-        while (def<14||def>16){
+        cin>>info->def;
+        while (info->def<14||info->def>16){
             cout<<"Input a number between 14 and 16\n";
-            cin>>def;
+            cin>>info->def;
         }
         cout<<"For your Attk, enter a number between or equal to 7 and 9\n";
-        cin>>attk;
-        while (attk<7||attk>9){
+        cin>>info->attk;
+        while (info->attk<7||info->attk>9){
             cout<<"Input a number between or equal to 7 and 9\n";
-            cin>>attk;
+            cin>>info->attk;
         }
         //show them their choosen results
         cout<<"These are your choosen stats: "<<endl;
-        cout<<"Your Pow is "<<pow<<endl;
-        cout<<"Your Def is "<<def<<endl;
-        cout<<"Your Attk is "<<attk<<endl;
+        cout<<"Your Pow is "<<info->pow<<endl;
+        cout<<"Your Def is "<<info->def<<endl;
+        cout<<"Your Attk is "<<info->attk<<endl;
         //Give them the option to re input their stats if they want
         cout<<"Are you okay with these stats?"<<endl;
         cout<<"Enter Y to accept and N to enter new stats"<<endl;
@@ -125,17 +124,16 @@ short intro(short& pow,short& def,short& attk){
     cout<<"Your chosen stats will be put into a file if you want to use it "
             "later"<<endl;
     fileout.open("Your_Stats.dat");
-    fileout<<"Your Pow is = "<<pow<<"\r\n"
-            <<"Your Def is = "<<def<<"\r\n"
-            <<"Your Attk is = "<<attk<<endl;
+    fileout<<"Your Pow is = "<<info->pow<<"\r\n"
+            <<"Your Def is = "<<info->def<<"\r\n"
+            <<"Your Attk is = "<<info->attk<<endl;
     fileout.close();
-    return 0;
 }
 
-short battle(short pow, short def, short attk, short PlayHp=50){
+void battle(player *info){
     //Set up the array to keep track of score
     int wins[1],loses[1];
-    player info;
+    int PlayHp=50;
     //After their stats are either input or rolled, have them select their
     //opponents from the list
     cout<<"Please select your opponent\n";
@@ -167,15 +165,15 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                 srand(static_cast<int>(time(0)));
                 int roll1; 
                 //Initiate the roll to Hit  
-                cout<<"Its your turn,"<<info.name<<" Roll to hit!"<<endl;
+                cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
                     Droll=dice(roll1);
                 }
                 cout<<"You rolled a "<<Droll;
-                toHit=Droll+attk;
-                cout<<"! Added to your attack modifer of "<<attk<<
+                toHit=Droll+(info->attk);
+                cout<<"! Added to your attack modifer of "<<info->attk<<
                        " you got a total of "<<toHit<<endl;
                 //If the player hits
                             if (toHit>=12){
@@ -188,7 +186,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                             NDroll=dice(roll1);
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
-                            Dmg=NDroll+pow;
+                            Dmg=NDroll+(info->pow);
                             cout<<"Your Damage total is "<<Dmg<<endl;
                             comp_Hp-=Dmg;
                 //If the player misses            
@@ -208,7 +206,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
-                    if (etohit>=def){
+                    if (etohit>=(info->def)){
                         cout<<"The opponent managed to hit you!"<<endl;
                         cout<<"They are going to damage you now"<<endl;
                         cout<<"Press R to have them roll for damage"<<endl;
@@ -257,8 +255,8 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     Droll=dice(roll1);
                 }
                 cout<<"You rolled a "<<Droll;
-                toHit=Droll+attk;
-                cout<<"! Added to your attack modifer of "<<attk<<
+                toHit=Droll+(info->attk);
+                cout<<"! Added to your attack modifer of "<<(info->attk)<<
                        " you got a total of "<<toHit<<endl;
                 //If the player hits
                             if (toHit>=13){
@@ -271,7 +269,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                             NDroll=dice(roll1);
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
-                            Dmg=NDroll+pow;
+                            Dmg=NDroll+(info->pow);
                             cout<<"Your Damage total is "<<Dmg<<endl;
                             comp_Hp-=Dmg;
                 //If the player misses            
@@ -291,7 +289,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
-                    if (etohit>=def){
+                    if (etohit>=(info->def)){
                         cout<<"The opponent managed to hit you!"<<endl;
                         cout<<"They are going to damage you now"<<endl;
                         cout<<"Press R to have them roll for damage"<<endl;
@@ -339,8 +337,8 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     Droll=dice(roll1);
                 }
                 cout<<"You rolled a "<<Droll;
-                toHit=Droll+attk;
-                cout<<"! Added to your attack modifer of "<<attk<<
+                toHit=Droll+(info->attk);
+                cout<<"! Added to your attack modifer of "<<(info->attk)<<
                        " you got a total of "<<toHit<<endl;
                 //If the player hits
                             if (toHit>=14){
@@ -353,7 +351,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                             NDroll=dice(roll1);
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
-                            Dmg=NDroll+pow;
+                            Dmg=NDroll+(info->pow);
                             cout<<"Your Damage total is "<<Dmg<<endl;
                             comp_Hp-=Dmg;
                 //If the player misses            
@@ -373,7 +371,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
-                    if (etohit>=def){
+                    if (etohit>=(info->def)){
                         cout<<"The opponent managed to hit you!"<<endl;
                         cout<<"They are going to damage you now"<<endl;
                         cout<<"Press R to have them roll for damage"<<endl;
@@ -421,8 +419,8 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     Droll=dice(roll1);
                 }
                 cout<<"You rolled a "<<Droll;
-                toHit=Droll+attk;
-                cout<<"! Added to your attack modifer of "<<attk<<
+                toHit=Droll+(info->attk);
+                cout<<"! Added to your attack modifer of "<<(info->attk)<<
                        " you got a total of "<<toHit<<endl;
                 //If the player hits
                             if (toHit>=13){
@@ -435,7 +433,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                             NDroll=dice(roll1);
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
-                            Dmg=NDroll+pow;
+                            Dmg=NDroll+(info->pow);
                             cout<<"Your Damage total is "<<Dmg<<endl;
                             comp_Hp-=Dmg;
                 //If the player misses            
@@ -455,7 +453,7 @@ short battle(short pow, short def, short attk, short PlayHp=50){
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
-                    if (etohit>=def){
+                    if (etohit>=(info->def)){
                         cout<<"The opponent managed to hit you!"<<endl;
                         cout<<"They are going to damage you now"<<endl;
                         cout<<"Press R to have them roll for damage"<<endl;
