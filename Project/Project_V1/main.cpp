@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Christopher Avalos
- * Subject: Second Project
+ * Subject: First Project
  * Created on October 12, 2015, 4:00 PM
  */
 //System Libraries
@@ -15,24 +15,29 @@ using namespace std;
 //user libraries
 
 //global constants
-struct player
+
+//function prototypes
+
+struct player   //Structure used to hold all of the players information
+                //this information in this structure will be passed between the
+                //different functions
 {
-    string name;    //player name
+    string name;//[50];    //player name, keep it under 50 letters
     int pow;    //players power
     int def;    //players defensive stat
     int attk;   //players attack value
 };
-//function prototypes
-void intro(player *info);
-void battle(player *info);
-short dice(int);
+
+void intro(player *info);   //function that holds the initial player setup
+void battle(player *info);  //function used for the different fight segements
+short dice(int);    //function used for dice rolls
 
 
 
 //The fun starts here!
 int main(int argc, char** argv) {
     //define the variables
-    player *info = new player;//
+    player *info = new player; //setup for the structure to be used
     
     short pow,def,attk,PlayHp;
     
@@ -46,15 +51,15 @@ int main(int argc, char** argv) {
 void intro(player *info){
     //Mostly variables involving dice rolls and the random generator
     //rolls using D6
-    //Used to determine the stats
-    srand(time(0));
+    srand(time(0));//Used to determine the stats
     //for file in/out
     ofstream fileout;
     ifstream filein;
     //Creating the character stats
-    cout<<"Hello! Please enter the player name\n";
-    getline(cin, info->name);
-    cout<<"Welcome "<<info->name<<"!\n";
+    cout<<"Hello! Please enter the player name\n";//Player enters their name
+    getline(cin, info->name);                       
+    cout<<"Welcome "<<info->name<<"!\n";//Their name will be repeated throughout
+                                        //the game
     //Gives them an option to either roll randomly for their stats or to input
     //their own
     cout<<"Would you like to roll randomly for your stats or assign your own?\n";
@@ -68,12 +73,13 @@ void intro(player *info){
         cout<<"The following rolls will see what kind of stats you have"<<endl;
         //uses 3 sided die plus minimum result-1
         
-        info->pow =(rand()%3)+11; //=pow;
+        info->pow =(rand()%3)+11; //pow is rolled and placed into the structure
         
-        info->def=(rand()%3)+14;
+        info->def=(rand()%3)+14;  //def is rolled and placed into the structure
         
-        info->attk=(rand()%3)+6;
+        info->attk=(rand()%3)+6;  //attk is rolled and placed into the structure
         //show them the random results
+        //all this information is called back from the function
         cout<<"Your Attack modifier is "<<info->attk<<endl;       
         cout<<"Your Defense is "<<info->def<<endl;
         cout<<"Your Pow is "<<info->pow<<endl;
@@ -248,7 +254,7 @@ void battle(player *info){
                 srand(static_cast<int>(time(0)));
                 int roll1;
                 //Initiate the roll to Hit  
-                cout<<"Its your turn, Roll to hit!"<<endl;
+                cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
@@ -330,7 +336,7 @@ void battle(player *info){
                 srand(static_cast<int>(time(0)));
                 int roll1; 
                 //Initiate the roll to Hit  
-                cout<<"Its your turn, Roll to hit!"<<endl;
+                cout<<"Its your turn "<<info->name<<",Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
@@ -412,7 +418,7 @@ void battle(player *info){
                 srand(static_cast<int>(time(0)));
                 int roll1; 
                 //Initiate the roll to Hit  
-                cout<<"Its your turn, Roll to hit!"<<endl;
+                cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
@@ -488,7 +494,7 @@ void battle(player *info){
             break;
         }
         default:{
-            cout<<"exit?"<<endl;
+            cout<<"Good-Bye"<<endl;
         }
     }
     }while (choice>='1'&&choice<='5');
