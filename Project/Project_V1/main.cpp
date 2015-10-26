@@ -22,7 +22,7 @@ struct player   //Structure used to hold all of the players information
                 //this information in this structure will be passed between the
                 //different functions
 {
-    string name;//[50];    //player name, keep it under 50 letters
+    string name;//player name, keep it under 50 letters
     int pow;    //players power
     int def;    //players defensive stat
     int attk;   //players attack value
@@ -53,18 +53,40 @@ void intro(player *info){
     //rolls using D6
     srand(time(0));//Used to determine the stats
     //for file in/out
+    char answer;
     ofstream fileout;
-    ifstream filein;
+    fstream filein;
     //Creating the character stats
     cout<<"Hello! Please enter the player name\n";//Player enters their name
     getline(cin, info->name);                       
     cout<<"Welcome "<<info->name<<"!\n";//Their name will be repeated throughout
                                         //the game
+    cout<<"Let checks and see if you have any files saved on here"<<endl;
+    filein.open("Your_Stats.dat", ios::in);
+    if(filein.fail())//checks to see if a previous file with the information is one here
+    {
+        cout<<"Doesn't look like you do..."<<endl;//if there isnt, this message
+        //is displayed letting them know
+    }
+    else//if there is, this message will pop and read off their stats they used
+        //before
+    {
+        cout<<"Looks like theres something here, these are the stats used last "
+                "time\n";
+        string input;
+        getline(filein, input);
+        while(filein){
+            cout<<input<<endl;
+            getline(filein,input);
+        }
+        filein.close();
+    }
+    cout<<"Keep these stats in mind if you want to use them again\n";  
     //Gives them an option to either roll randomly for their stats or to input
     //their own
     cout<<"Would you like to roll randomly for your stats or assign your own?\n";
     cout<<"Enter either Y for yes, or n to input your own\n";
-    char answer;
+    
     cin>>answer;
     //If they answer yes, Character creation is random using a 3 sided die and
     //added to the minimum modifier
@@ -120,7 +142,7 @@ void intro(player *info){
         cout<<"Are you okay with these stats?"<<endl;
         cout<<"Enter Y to accept and N to enter new stats"<<endl;
         cin>>answer;
-    }while (answer=='n'||answer=='N');  
+    }while (answer=='n'||answer=='N');
     }
 
     //Reserve this spot for the input into a file
@@ -132,6 +154,7 @@ void intro(player *info){
             <<"Your Attk is = "<<info->attk<<endl;
     fileout.close();
 }
+
 
 void battle(player *info){
     //Set up the array to keep track of score

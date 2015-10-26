@@ -74,7 +74,7 @@ void intro(player *info){
         }
         filein.close();
     }
-    cout<<"Keep these stats in mind if you want to use the again\n";  
+    cout<<"Keep these stats in mind if you want to use them again\n";  
     //Gives them an option to either roll randomly for their stats or to input
     //their own
     cout<<"Would you like to roll randomly for your stats or assign your own?\n";
@@ -145,7 +145,6 @@ void intro(player *info){
     fileout<<"Your Pow is = "<<info->pow<<"\r\n"
             <<"Your Def is = "<<info->def<<"\r\n"
             <<"Your Attk is = "<<info->attk<<endl;
-    fileout.write(reinterpret_cast<char *>(&info),sizeof(info));
     fileout.close();
 }
 
