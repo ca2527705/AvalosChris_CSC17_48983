@@ -72,11 +72,8 @@ void intro(player *info){
         do{
         cout<<"The following rolls will see what kind of stats you have"<<endl;
         //uses 3 sided die plus minimum result-1
-        
         info->pow =(rand()%3)+11; //pow is rolled and placed into the structure
-        
         info->def=(rand()%3)+14;  //def is rolled and placed into the structure
-        
         info->attk=(rand()%3)+6;  //attk is rolled and placed into the structure
         //show them the random results
         //all this information is called back from the function
