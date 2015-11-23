@@ -10,15 +10,13 @@
 #include <ctime>
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
-    
-    dice test;
-    
-    cout<<"You rolled a "<<test.results<<endl;
 
+
+int main(int argc, char** argv) {
+    srand(static_cast<int>(time(0)));
+    dice test;
+    test.rolldice();
+    cout<<"You rolled a "<<test.results()<<endl;
     return 0;
 }
 
