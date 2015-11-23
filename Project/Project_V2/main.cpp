@@ -5,6 +5,7 @@
  * Created on October 12, 2015, 4:00 PM
  */
 //System Libraries
+#include "dice.h"//My dice rolling class
 #include <iostream>//basic cin/cout usage
 #include <cstdlib>//To use the rand
 #include <ctime>//For use in the rand
@@ -37,6 +38,7 @@ short dice(int);    //function used for dice rolls
 //The fun starts here!
 int main(int argc, char** argv) {
     //define the variables
+    dice player;//instance of the dice class
     player *info = new player; //setup for the structure to be used
     
     short pow,def,attk,PlayHp;
@@ -186,7 +188,7 @@ void battle(player *info){
                         comp_Hp=15,comp_dmg=10,compatk=5;
 
                 cout<<"A Grunt decides to pick a fight!"<<endl;                 
-                    computer=false;    
+                computer=false;    
                 do{
                 srand(static_cast<int>(time(0)));
                 int roll1; 
@@ -195,7 +197,7 @@ void battle(player *info){
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
-                    Droll=dice(roll1);
+                    Droll=player.results();
                 }
                 cout<<"You rolled a "<<Droll;
                 toHit=Droll+(info->attk);
