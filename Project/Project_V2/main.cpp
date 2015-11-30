@@ -31,14 +31,12 @@ struct player   //Structure used to hold all of the players information
 
 void intro(player *info);   //function that holds the initial player setup
 void battle(player *info);  //function used for the different fight segements
-short dice(int);    //function used for dice rolls
 
 
 
 //The fun starts here!
 int main(int argc, char** argv) {
     //define the variables
-    dice player;//instance of the dice class
     player *info = new player; //setup for the structure to be used
     
     short pow,def,attk,PlayHp;
@@ -162,6 +160,7 @@ void battle(player *info){
     //Set up the array to keep track of score
     int wins[1],loses[1];
     int PlayHp=50;
+    dice test;//dice instance
     //After their stats are either input or rolled, have them select their
     //opponents from the list
     cout<<"Please select your opponent\n";
@@ -191,13 +190,13 @@ void battle(player *info){
                 computer=false;    
                 do{
                 srand(static_cast<int>(time(0)));
-                int roll1; 
                 //Initiate the roll to Hit  
                 cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
-                    Droll=player.results();
+                    test.rolldice();
+                    Droll=test.results();
                 }
                 cout<<"You rolled a "<<Droll;
                 toHit=Droll+(info->attk);
@@ -211,7 +210,8 @@ void battle(player *info){
                             cout<<"Enter R then hit enter"<<endl;
                             cin>>roll;
                             if (roll=='r'||roll=='R'){
-                            NDroll=dice(roll1);
+                            test.rolldice();
+                            NDroll=test.results();
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
                             Dmg=NDroll+(info->pow);
@@ -230,7 +230,8 @@ void battle(player *info){
                     cout<<"The opponent tries to attack!"<<endl;
                     cout<<"Press R to have them roll"<<endl;
                     cin>>roll;
-                    eRoll=dice(roll1);
+                    test.rolldice();
+                    eRoll=test.results();
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
@@ -239,7 +240,8 @@ void battle(player *info){
                         cout<<"They are going to damage you now"<<endl;
                         cout<<"Press R to have them roll for damage"<<endl;
                         cin>>roll;
-                        PlayHp-=(dice(roll1)+comp_dmg);
+                        test.rolldice();
+                        PlayHp-=(test.results()+comp_dmg);
                         cout<<"The computer rolled a "<<eRoll<<endl;
                         cout<<"The computer hits you for "<<eRoll+comp_dmg<<endl;
                         cout<<"You have "<<PlayHp<<" Hit points left!"<<endl;
@@ -274,13 +276,13 @@ void battle(player *info){
                     computer=false;    
                 do{
                 srand(static_cast<int>(time(0)));
-                int roll1;
                 //Initiate the roll to Hit  
                 cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
-                    Droll=dice(roll1);
+                    test.rolldice();
+                    Droll=test.results();
                 }
                 cout<<"You rolled a "<<Droll;
                 toHit=Droll+(info->attk);
@@ -294,7 +296,8 @@ void battle(player *info){
                             cout<<"Enter R then hit enter"<<endl;
                             cin>>roll;
                             if (roll=='r'||roll=='R'){
-                            NDroll=dice(roll1);
+                            test.rolldice();
+                            NDroll=test.results();
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
                             Dmg=NDroll+(info->pow);
@@ -313,7 +316,8 @@ void battle(player *info){
                     cout<<"The opponent tries to attack!"<<endl;
                     cout<<"Press R to have them roll"<<endl;
                     cin>>roll;
-                    eRoll=dice(roll);
+                    test.rolldice();
+                    eRoll=test.results();
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
@@ -356,13 +360,14 @@ void battle(player *info){
                     computer=false;    
                 do{
                 srand(static_cast<int>(time(0)));
-                int roll1; 
+
                 //Initiate the roll to Hit  
                 cout<<"Its your turn "<<info->name<<",Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
-                    Droll=dice(roll1);
+                    test.rolldice();
+                    Droll=test.results();
                 }
                 cout<<"You rolled a "<<Droll;
                 toHit=Droll+(info->attk);
@@ -376,7 +381,8 @@ void battle(player *info){
                             cout<<"Enter R then hit enter"<<endl;
                             cin>>roll;
                             if (roll=='r'||roll=='R'){
-                            NDroll=dice(roll1);
+                            test.rolldice();
+                            NDroll=test.results();
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
                             Dmg=NDroll+(info->pow);
@@ -395,7 +401,8 @@ void battle(player *info){
                     cout<<"The opponent tries to attack!"<<endl;
                     cout<<"Press R to have them roll"<<endl;
                     cin>>roll;
-                    eRoll=dice(roll1);
+                    test.rolldice();
+                    eRoll=test.results();
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
@@ -435,16 +442,17 @@ void battle(player *info){
                 ,comp_dmg=16,compatk=9;
 
                 cout<<"The Butcher decides to pick a fight!"<<endl;                 
-                    computer=false;    
+                computer=false;    
                 do{
                 srand(static_cast<int>(time(0)));
-                int roll1; 
+
                 //Initiate the roll to Hit  
                 cout<<"Its your turn "<<info->name<<", Roll to hit!"<<endl;
                 cout<<"Enter R then hit enter"<<endl;
                 cin>>roll;
                 if (roll=='r'||roll=='R'){
-                    Droll=dice(roll1);
+                    test.rolldice();
+                    Droll=test.results();
                 }
                 cout<<"You rolled a "<<Droll;
                 toHit=Droll+(info->attk);
@@ -458,7 +466,8 @@ void battle(player *info){
                             cout<<"Enter R then hit enter"<<endl;
                             cin>>roll;
                             if (roll=='r'||roll=='R'){
-                            NDroll=dice(roll1);
+                            test.rolldice();
+                            NDroll=test.results();
                             }
                             cout<<"You rolled a "<<NDroll<<endl;
                             Dmg=NDroll+(info->pow);
@@ -477,7 +486,8 @@ void battle(player *info){
                     cout<<"The opponent tries to attack!"<<endl;
                     cout<<"Press R to have them roll"<<endl;
                     cin>>roll;
-                    eRoll=dice(roll1);
+                    test.rolldice();
+                    eRoll=test.results();
                     cout<<"The opponent rolled a "<<eRoll<<"!"<<endl;
                     etohit=eRoll+compatk;
                     cout<<"The total they have is "<<compatk+eRoll<<endl;
@@ -521,14 +531,4 @@ void battle(player *info){
     }
     }while (choice>='1'&&choice<='5');
     //Exit stage right 
-}
-
-short dice(int roll){
-    int roll1,roll2;
-    srand(static_cast<int>(time(0)));
-    roll1=(rand()%6)+1;
-    roll2=(rand()%6)+1;
-    cout<<"A "<<roll1<<" and a "<<roll2<<" was rolled\n";
-    roll=roll1+roll2;    
-    return (roll);
 }
