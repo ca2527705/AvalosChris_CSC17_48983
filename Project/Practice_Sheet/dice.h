@@ -13,8 +13,9 @@ class dice
     private:
         int roll;
     public:
-        void rolldice();
-        int results(){return roll;}
+        void rolldice();//constructor
+        int results()//inline function
+        {return roll;}
 };
 
 #endif	/* DICE_H */

@@ -2,7 +2,6 @@
  * File:   main.cpp
  * Author: Christopher Avalos
  * Subject: Second Project
- * Created on October 12, 2015, 4:00 PM
  */
 //System Libraries
 #include "dice.h"//My dice rolling class
