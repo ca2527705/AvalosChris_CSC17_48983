@@ -13,7 +13,6 @@ void dice::rolldice()
     srand(time(0));
     roll1=(rand()%6)+1;
     roll2=(rand()%6)+1;
-    
     //The two different rolls added together
     roll=roll1+roll2;
         

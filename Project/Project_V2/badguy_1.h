@@ -18,23 +18,23 @@ private:
     int bad_def;
     
 public:
-    //constructors
+    
     int set_hp(){
-        bad_hp=15;
-        return bad_hp;
-        }
+    bad_hp=15;
+    return bad_hp;
+    }
     int set_dmg(){
-        bad_dmg=10;    
-        return bad_dmg;    
-        };
+    bad_dmg=10;    
+    return bad_dmg;    
+    };
     int set_attk(){
-        bad_attk=5;    
-        return bad_attk;    
-        };
+    bad_attk=5;    
+    return bad_attk;    
+    };
     int set_def(){
-        bad_def=12;    
-        return bad_def;
-        };     
+    bad_def=12;    
+    return bad_def;
+    };     
     
 };
 

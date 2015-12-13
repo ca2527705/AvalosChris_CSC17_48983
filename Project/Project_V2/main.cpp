@@ -4,6 +4,7 @@
  * Subject: Second Project
  */
 //System Libraries
+#include "badguy.h"//computer class
 #include "dice.h"//My dice rolling class
 #include <iostream>//basic cin/cout usage
 #include <cstdlib>//To use the rand
@@ -159,6 +160,7 @@ void battle(player *info){
     //Set up the array to keep track of score
     int wins[1],loses[1];
     int PlayHp=50;
+    badguy cpu;//computer instance
     dice test;//dice instance
     //After their stats are either input or rolled, have them select their
     //opponents from the list
@@ -182,8 +184,10 @@ void battle(player *info){
                 //the two dice rolls lol   
                 bool computer;
                 char roll;
+                //e=enemy; so enemy to hit, enemy to roll...
                 int toHit,eRoll,etohit,Droll,NDroll,Dmg,
-                        comp_Hp=15,comp_dmg=10,compatk=5;
+                        comp_Hp=cpu.set_hp(),comp_dmg=cpu.set_dmg(),
+                        compatk=cpu.set_attk();
 
                 cout<<"A Grunt decides to pick a fight!"<<endl;                 
                 computer=false;    

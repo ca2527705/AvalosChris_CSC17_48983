@@ -176,7 +176,7 @@ void battle(player *info){
     cin>>choice;
 
     switch(choice){
-        case '1':{
+        case '1':{    
                 //Variables
                 //different dice rolls for player and opponent, 2 sets, one for hitting
                 //one for damage rolls. If i were smarter i could probably reduce it to just
@@ -185,7 +185,8 @@ void battle(player *info){
                 char roll;
                 //e=enemy; so enemy to hit, enemy to roll...
                 int toHit,eRoll,etohit,Droll,NDroll,Dmg,
-                        comp_Hp=cpu.set_hp(),comp_dmg=cpu.set_dmg(),compatk=cpu.set_attk();
+                        comp_Hp=cpu.set_hp(),comp_dmg=cpu.set_dmg(),
+                        compatk=cpu.set_attk();
 
                 cout<<"A Grunt decides to pick a fight!"<<endl;                 
                 computer=false;    

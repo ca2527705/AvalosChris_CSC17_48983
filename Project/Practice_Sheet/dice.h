@@ -11,6 +11,7 @@
 class dice
 {
     private:
+        //holds the roll result
         int roll;
     public:
         void rolldice();//constructor
