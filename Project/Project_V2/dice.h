@@ -14,11 +14,19 @@
 class dice
 {
     private:
+        //holds the roll result
         int roll;
     public:
-        void rolldice();
-        int results(){return roll;}
+        dice(int roll)
+        {roll=0;}
+        void rolldice();//constructor
+        int results()//inline function
+        {return roll;}
+//        ~dice()
+//        {delete roll;}
 };
+
 
 #endif	/* DICE_H */
 
+dice

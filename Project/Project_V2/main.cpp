@@ -4,7 +4,7 @@
  * Subject: Second Project
  */
 //System Libraries
-#include "badguy.h"//computer class
+#include "badguy.h"//computer ai class
 #include "dice.h"//My dice rolling class
 #include <iostream>//basic cin/cout usage
 #include <cstdlib>//To use the rand

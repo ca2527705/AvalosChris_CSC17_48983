@@ -38,7 +38,5 @@ public:
     
 };
 
-
-
 #endif	/* BADGUY_H */
 
